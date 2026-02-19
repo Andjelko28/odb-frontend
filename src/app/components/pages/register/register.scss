@@ -1,0 +1,47 @@
+@use '../../../../styles.scss' as var;
+
+.main-container {
+  border: 1px solid var.$main-light-grey;
+  border-radius: 5px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  max-height: 500px;
+  max-width: 500px;
+  padding: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  color: var.$primary-font-color;
+}
+
+.items-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.register-item {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  border: 1px solid var.$main-light-grey;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.submit-btn {
+  display: inline-block;
+  width: 260px;
+  height: 40px;
+  background: var.$main-light-grey;
+  border: 1px solid white;
+  color: var.$primary-font-color;
+  border-radius: 5px;
+}
