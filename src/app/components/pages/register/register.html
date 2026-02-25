@@ -1,28 +1,44 @@
-<div class="flex main-container">
+<form [formGroup]="registerForm" (ngSubmit)="submit()" class="flex main-container">
   <div>
     <h2>Create your account</h2>
   </div>
 
   <div class="items-wrapper">
     <div class="register-item">
-      <label for="email">Email</label>
-      <input name="email" type="email" />
+      <label>Email</label>
+      <input type="email" formControlName="email" />
+      <small *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+        Invalid email
+      </small>
     </div>
+
     <div class="register-item">
-      <label for="password">Password</label>
-      <input name="password" type="password" />
+      <label>Password</label>
+      <input type="password" formControlName="password" />
     </div>
+
     <div class="register-item">
-      <label for="confirm-password">Confirm Password</label>
-      <input name="confirm-password" type="password" />
+      <label>Confirm Password</label>
+      <input type="password" formControlName="confirmPassword" />
+      <small
+        *ngIf="
+          registerForm.errors?.['passwordsMismatch'] && registerForm.get('confirmPassword')?.touched
+        "
+      >
+        Passwords do not match
+      </small>
     </div>
   </div>
 
   <div>
-    <button type="submit" class="submit-btn">Sign Up</button>
+    <button type="submit" class="submit-btn" [disabled]="registerForm.invalid || loading">
+      {{ loading ? 'Signing up...' : 'Sign Up' }}
+    </button>
   </div>
 
   <div>
-    <p>Already have an account?<a href="/login"> Sign In</a></p>
+    <p>Already have an account?<a routerLink="/login"> Sign In</a></p>
   </div>
-</div>
+
+  <p *ngIf="error" class="error">{{ error }}</p>
+</form>
