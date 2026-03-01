@@ -1,4 +1,4 @@
-<div class="flex main-container">
+<form [formGroup]="loginForm" (ngSubmit)="submit()" class="flex main-container">
   <div>
     <h2>Sign in to your account</h2>
   </div>
@@ -6,19 +6,28 @@
   <div class="items-wrapper">
     <div class="login-item">
       <label for="email">Email</label>
-      <input name="email" type="email" />
+      <input name="email" type="email" formControlName="email" />
     </div>
     <div class="login-item">
       <label for="password">Password</label>
-      <input name="password" type="password" />
+      <input name="password" type="password" formControlName="password" />
     </div>
   </div>
 
+  <small
+    *ngIf="
+      (loginForm.get('email')?.errors?.['invalidCredentials'] && loginForm.get('email')?.touched) ||
+      (loginForm.get('password')?.errors?.['invalidCredentials'] &&
+        loginForm.get('password')?.touched)
+    "
+  >
+    Invalid email or password
+  </small>
   <div>
-    <button type="submit" class="submit-btn">Sign In</button>
+    <button type="submit" class="submit-btn">Log In</button>
   </div>
 
   <div>
-    <p>Don't have an account? <a href="/register"> Sign Up?</a></p>
+    <p>Don't have an account? <a routerLink="/register"> Sign Up?</a></p>
   </div>
-</div>
+</form>
