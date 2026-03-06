@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
@@ -18,6 +18,7 @@ export class Login {
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
+    private router: Router,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -37,6 +38,7 @@ export class Login {
       next: () => {
         this.loading = false;
         this.loginForm.reset();
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         // this.error = err.error?.message || 'Logging in failed. Please try again.';
